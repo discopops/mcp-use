@@ -9,14 +9,14 @@
 
 <h1 align="center">🚀 mcp-use for Python</h1>
 <p align="center">
-    <a href="https://github.com/pietrozullo/mcp-use/stargazers" alt="GitHub stars">
-        <img src="https://img.shields.io/github/stars/pietrozullo/mcp-use?style=social" /></a>
+    <a href="https://github.com/mcp-use/mcp-use/stargazers" alt="GitHub stars">
+        <img src="https://img.shields.io/github/stars/mcp-use/mcp-use?style=social" /></a>
     <a href="https://pypi.org/project/mcp_use/" alt="PyPI Downloads">
         <img src="https://static.pepy.tech/badge/mcp-use" /></a>
     <a href="https://pypi.org/project/mcp_use/" alt="PyPI Version">
         <img src="https://img.shields.io/pypi/v/mcp_use.svg"/></a>
-    <a href="https://github.com/pietrozullo/mcp-use/blob/main/LICENSE" alt="License">
-        <img src="https://img.shields.io/github/license/pietrozullo/mcp-use" /></a>
+    <a href="https://github.com/mcp-use/mcp-use/blob/main/LICENSE" alt="License">
+        <img src="https://img.shields.io/github/license/mcp-use/mcp-use" /></a>
     <a href="https://mcp-use.com/docs" alt="Documentation">
         <img src="https://img.shields.io/badge/docs-mcp--use.com-blue" /></a>
     <a href="https://discord.gg/XkNkSkMz3V" alt="Discord">
@@ -49,7 +49,7 @@ mcp-use for Python provides three main capabilities:
 
 | Supports       |                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   |
 | :------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| **Primitives** | [![Tools](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/tools&label=Tools&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Resources](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/resources&label=Resources&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Prompts](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/prompts&label=Prompts&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Sampling](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/sampling&label=Sampling&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Elicitation](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/elicitation&label=Elicitation&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Authentication](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/authentication&label=Authentication&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) |
+| **Primitives** | [![Tools](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/tools&label=Tools&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Resources](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/resources&label=Resources&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Prompts](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/prompts&label=Prompts&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Sampling](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/sampling&label=Sampling&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Elicitation](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/elicitation&label=Elicitation&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Roots](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/roots&label=Roots&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Authentication](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-primitive/authentication&label=Authentication&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) |
 | **Transports** | [![Stdio](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-transport/stdio&label=Stdio&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![SSE](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-transport/sse&label=SSE&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml) [![Streamable HTTP](https://img.shields.io/github/actions/workflow/status/mcp-use/mcp-use/ci.yml?job=python-transport/streamable_http&label=Streamable%20HTTP&style=flat)](https://github.com/mcp-use/mcp-use/actions/workflows/ci.yml)                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             |
 
 ## Features
@@ -725,16 +725,26 @@ if __name__ == "__main__":
 
 # 🛠️ MCP Server
 
-**Coming Soon!** Python support for creating MCP servers is under development.
+Build MCP servers in Python with a simple decorator-based API:
 
-In the meantime, you can create MCP servers using our [TypeScript implementation](../typescript/README.md#%EF%B8%8F-mcp-server-framework), which offers:
+```python
+from mcp_use import MCPServer
 
-- Complete server framework with tools, resources, and prompts
-- Built-in inspector for debugging
-- React-based UI widgets for interactive experiences
-- Hot reload development workflow
+server = MCPServer(
+    name="my-server",
+    version="1.0.0",
+)
 
-Python agents and clients can connect to TypeScript servers seamlessly - the MCP protocol is language-agnostic.
+@server.tool()
+def get_weather(city: str) -> dict:
+    """Get weather for a city"""
+    return {"temperature": 72, "condition": "sunny", "city": city}
+
+if __name__ == "__main__":
+    server.run()
+```
+
+For the full server framework with UI widgets and built-in inspector, see the [TypeScript implementation](../typescript/README.md#%EF%B8%8F-mcp-server-framework).
 
 ---
 
@@ -795,11 +805,11 @@ This is useful when you only need to see the agent's steps and decision-making p
 
 ## Star History
 
-[![Star History Chart](https://api.star-history.com/svg?repos=pietrozullo/mcp-use&type=Date)](https://www.star-history.com/#pietrozullo/mcp-use&Date)
+[![Star History Chart](https://api.star-history.com/svg?repos=mcp-use/mcp-use&type=Date)](https://www.star-history.com/#mcp-use/mcp-use&Date)
 
 # Contributing
 
-We love contributions! Feel free to open issues for bugs or feature requests. Look at [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+We love contributions! Feel free to open issues for bugs or feature requests. Look at [CONTRIBUTING.md](../../CONTRIBUTING.md) for guidelines.
 
 ## Top Starred Dependents
 
@@ -874,7 +884,7 @@ If you use mcp-use in your research or project, please cite:
   title = {mcp-use: MCP Library for Python},
   year = {2025},
   publisher = {GitHub},
-  url = {https://github.com/pietrozullo/mcp-use}
+  url = {https://github.com/mcp-use/mcp-use}
 }
 ```
 
