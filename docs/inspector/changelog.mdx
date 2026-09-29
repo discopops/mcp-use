@@ -6,6 +6,71 @@ rss: true
 tag: "New"
 ---
 
+<Update label="v20.3.13" description="September 2026">
+  ## View cancellation release alignment
+  Patch release paired with `mcp-use` v2.7.1; rebuilds the bundled Inspector with no Inspector-specific source changes.
+
+- **Update**: rebuild bundled workspace code and synchronize published internal package metadata
+- **Update**: Updated mcp-use to v2.7.1
+</Update>
+
+<Update label="v20.3.12" description="September 2026">
+  ## Mixed authentication release alignment
+  Patch release paired with `mcp-use` v2.7.0; rebuilds the bundled Inspector with no Inspector-specific source changes.
+
+- **Update**: rebuild bundled workspace code and synchronize published internal package metadata
+- **Update**: Updated mcp-use to v2.7.0
+</Update>
+
+<Update label="v20.3.11" description="September 2026">
+  ## TanStack Start release alignment
+  Patch release paired with `mcp-use` v2.6.0; there are no Inspector-specific source changes.
+
+- **Update**: Updated mcp-use to v2.6.0
+</Update>
+
+<Update label="v20.3.10" description="September 2026">
+  ## Scrollable MCP App results
+  Patch release paired with `mcp-use` v2.5.2, keeping tall tool results accessible.
+
+- **Fix**: tall MCP App tool results scroll within the result panel instead of extending beyond it (`#2598`)
+- **Update**: Updated mcp-use to v2.5.2
+</Update>
+
+<Update label="v20.3.9" description="September 2026">
+  ## Managed chat model branding & provider selection
+  Patch release paired with `mcp-use` v2.5.1, showing the selected cloud model accurately and simplifying provider selection.
+
+- **Fix**: managed chat badges use the selected cloud model's name and provider logo instead of the default transport model's branding (`#2575`)
+- **Enhancement**: the Manufact cloud provider picker offers OpenAI, Anthropic, and Google; existing selections from other providers remain visible with accurate labels, while evals retain the full catalog and BYOK OpenRouter remains available (`#2576`)
+- **Update**: `MCPServerConfig.auth_token` is deprecated but retained for type compatibility; use `authToken` to send an authentication token (`#2486`)
+- **Update**: update Hono to `^4.13.5` (`#2492`)
+- **Update**: Updated mcp-use to v2.5.1
+</Update>
+
+<Update label="v20.3.8" description="September 2026">
+  ## Bundled Inspector rebuild
+  Patch release paired with `mcp-use` v2.5.0, rebuilding the standalone Inspector with the agent OpenRouter fix.
+
+- **Fix**: rebuild the standalone Inspector with the OpenRouter Responses API agent fix and repair published framework peer metadata (`#2504`)
+- **Update**: Updated mcp-use to v2.5.0
+</Update>
+
+<Update label="v20.3.7" description="September 2026">
+  ## Workspace package alignment
+  Patch release paired with `mcp-use` v2.4.3; there are no Inspector-specific source changes.
+
+- **Update**: Updated mcp-use to v2.4.3
+</Update>
+
+<Update label="v20.3.6" description="September 2026">
+  ## Publish artifact preservation
+  Patch release paired with `mcp-use` v2.4.2, keeping package builds intact while npm pack runs.
+
+- **Fix**: concurrent publishing no longer drops the Client build while its tarball is created, and packed artifacts are checked for declared files and entry points (`#2428`)
+- **Update**: Updated mcp-use to v2.4.2
+</Update>
+
 <Update label="v20.3.5" description="September 2026">
   ## Chat widgets use the connection id
   Patch release paired with `mcp-use` v2.4.1, rendering chat MCP Apps against the registered connection.

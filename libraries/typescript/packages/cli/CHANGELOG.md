@@ -1,5 +1,121 @@
 # @mcp-use/cli
 
+## 4.1.17
+
+### Patch Changes
+
+- 7d71ef7: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 4.1.17-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 4.1.16
+
+### Patch Changes
+
+- 3640505: Reject screenshot dimensions that Chrome cannot use.
+
+## 4.1.16-canary.0
+
+### Patch Changes
+
+- 7eb0466: Reject screenshot dimensions that Chrome cannot use.
+
+## 4.1.15
+
+### Patch Changes
+
+- 4866186: Resolve the organization in `mcp-use whoami` the same way `org current` and every `servers`/`deployments` command already do, by falling back to the account default when the local config has no explicit selection. Authenticating with `MCP_USE_API_KEY` without running `mcp-use login` previously made `whoami` report `organization: null` while the rest of the CLI read and mutated that organization's resources.
+- 4866186: Trim `skills.directory` before resolving it. The blank check already tested the trimmed value, but the untrimmed string was passed to `resolve`, so `skills: { directory: " skills" }` resolved to a sibling directory with a leading space and no skills were discovered.
+- 4866186: Rebuild bundled workspace code and synchronize published internal package metadata.
+- 4866186: Add `mcp-use/vite`, `mcp-use/tanstack-start` and `mcp-use/tanstack-start/vite` for mounting MCP servers in TanStack React Start. A dedicated MCP Vite environment reloads server code and skill/view registrations, while views share the application's browser environment for React Fast Refresh and CSS HMR. Successful server updates interrupt old requests; invalid edits retain the previous handler.
+
+  Production builds compile views in a separate environment and embed assets and skills into the deployable server output. The route adapter uses `createTanStackStartHandler()` without importing the authored server. Configure React, CSS and aliases in the main Vite config; the previous `viewsConfig` option is no longer supported. Include a Node/Nitro example and browser checks for development HMR and source-free production deployments.
+
+  Validate the compiled MCP server with the host's production Vite configuration, preserving custom defines, build plugins, aliases and mode-specific environment values.
+
+## 4.1.15-canary.2
+
+### Patch Changes
+
+- 3e8a1d6: Resolve the organization in `mcp-use whoami` the same way `org current` and every `servers`/`deployments` command already do, by falling back to the account default when the local config has no explicit selection. Authenticating with `MCP_USE_API_KEY` without running `mcp-use login` previously made `whoami` report `organization: null` while the rest of the CLI read and mutated that organization's resources.
+- 01dedad: Trim `skills.directory` before resolving it. The blank check already tested the trimmed value, but the untrimmed string was passed to `resolve`, so `skills: { directory: " skills" }` resolved to a sibling directory with a leading space and no skills were discovered.
+
+## 4.1.15-canary.1
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 4.1.15-canary.0
+
+### Patch Changes
+
+- 02196f8: Add `mcp-use/vite`, `mcp-use/tanstack-start` and `mcp-use/tanstack-start/vite` for mounting MCP servers in TanStack React Start. A dedicated MCP Vite environment reloads server code and skill/view registrations, while views share the application's browser environment for React Fast Refresh and CSS HMR. Successful server updates interrupt old requests; invalid edits retain the previous handler.
+
+  Production builds compile views in a separate environment and embed assets and skills into the deployable server output. The route adapter uses `createTanStackStartHandler()` without importing the authored server. Configure React, CSS and aliases in the main Vite config; the previous `viewsConfig` option is no longer supported. Include a Node/Nitro example and browser checks for development HMR and source-free production deployments.
+
+  Validate the compiled MCP server with the host's production Vite configuration, preserving custom defines, build plugins, aliases and mode-specific environment values.
+
+## 4.1.14
+
+### Patch Changes
+
+- 46cc2cf: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 4.1.14-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 4.1.13
+
+### Patch Changes
+
+- b1bda25: Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 4.1.13-canary.0
+
+### Patch Changes
+
+- Rebuild bundled workspace code and synchronize published internal package metadata.
+
+## 4.1.12
+
+### Patch Changes
+
+- 485c79c: Report a malformed JSON argument to `client` and `screenshot` as a usage error instead of letting the engine's `SyntaxError` escape. A bad `{...}` or `key:=<json>` value exited 1 with a bare parser message and no indication of which argument was wrong, while every other grammar mistake in the same parser exits 2.
+- 485c79c: Document that `--secret` must be passed on every `servers env set` write, including updates and rotations, and say so in the success message when a value is stored write-only
+- 485c79c: Fix `servers list` reporting a bad `--limit` or `--skip` as `Not logged in.` when signed out. Pagination was validated after the cloud client was created, so an invalid page size surfaced as an operational failure with exit 1 instead of the usage error with exit 2 that `deployments list` already returns for the same input.
+
+## 4.1.12-canary.3
+
+### Patch Changes
+
+- b86bf80: Fix `servers list` reporting a bad `--limit` or `--skip` as `Not logged in.` when signed out. Pagination was validated after the cloud client was created, so an invalid page size surfaced as an operational failure with exit 1 instead of the usage error with exit 2 that `deployments list` already returns for the same input.
+
+## 4.1.12-canary.2
+
+### Patch Changes
+
+- d6614ff: Report a malformed JSON argument to `client` and `screenshot` as a usage error instead of letting the engine's `SyntaxError` escape. A bad `{...}` or `key:=<json>` value exited 1 with a bare parser message and no indication of which argument was wrong, while every other grammar mistake in the same parser exits 2.
+
+## 4.1.12-canary.1
+
+### Patch Changes
+
+- 290d7c4: Document that `--secret` must be passed on every `servers env set` write, including updates and rotations, and say so in the success message when a value is stored write-only
+
+## 4.1.12-canary.0
+
+### Patch Changes
+
+- @mcp-use/inspector@20.3.8-canary.0
+
 ## 4.1.11
 
 ### Patch Changes

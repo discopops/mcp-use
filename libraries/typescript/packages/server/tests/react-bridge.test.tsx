@@ -11,6 +11,7 @@ import {
   getPublicBaseUrl,
   Image,
   ModelContext,
+  ToolCancelledError,
   ToolError,
   ThemeProvider,
   toolResultText,
@@ -240,12 +241,25 @@ describe("react bridge runtime", () => {
     });
   });
 
-  it("leaves the progressive pending snapshot unchanged on cancellation", async () => {
+  it("latches host cancellation as status error with ToolCancelledError", async () => {
     resetRuntime();
     const { bridge, init } = await startHost();
 
     function View() {
       const handle = useToolContext();
+      if (handle.status === "error") {
+        return (
+          <div data-testid="lifecycle">
+            error|
+            {handle.error instanceof ToolCancelledError
+              ? `cancelled:${handle.error.reason ?? ""}`
+              : "other"}
+            |{handle.error.message}|
+            {(handle.toolInput as { query?: string } | undefined)?.query ?? ""}|
+            {handle.content === undefined ? "no-content" : "content"}
+          </div>
+        );
+      }
       return (
         <div data-testid="lifecycle">
           {handle.status}|
@@ -264,7 +278,37 @@ describe("react bridge runtime", () => {
 
     await bridge.sendToolCancelled({ reason: "user action" });
     await waitFor(() => {
-      expect(screen.getByTestId("lifecycle").textContent).toBe("pending|ap");
+      expect(screen.getByTestId("lifecycle").textContent).toBe(
+        "error|cancelled:user action|Tool call was cancelled: user action|ap|no-content"
+      );
+    });
+  });
+
+  it("uses a default cancellation message when the host sends no reason", async () => {
+    resetRuntime();
+    const { bridge, init } = await startHost();
+
+    function View() {
+      const handle = useToolContext();
+      if (handle.status === "error") {
+        return (
+          <div data-testid="lifecycle">
+            {handle.error instanceof ToolCancelledError ? "cancelled" : "other"}
+            |{handle.error.message}
+          </div>
+        );
+      }
+      return <div data-testid="lifecycle">{handle.status}</div>;
+    }
+
+    bootstrapView({ default: View as ComponentType });
+    await init;
+
+    await bridge.sendToolCancelled({});
+    await waitFor(() => {
+      expect(screen.getByTestId("lifecycle").textContent).toBe(
+        "cancelled|Tool call was cancelled."
+      );
     });
   });
 
@@ -457,15 +501,20 @@ describe("react bridge runtime", () => {
     });
   });
 
-  it("continues accepting progressive input after cancellation until a result latches", async () => {
+  it("keeps a cancellation latched across later lifecycle notifications", async () => {
     resetRuntime();
     const { bridge, init } = await startHost();
 
     function View() {
       const handle = useToolContext();
-      if (handle.status === "ready") {
-        const { query } = handle.toolOutput as { query: string };
-        return <div data-testid="lifecycle">ready|{query}</div>;
+      if (handle.status === "error") {
+        return (
+          <div data-testid="lifecycle">
+            error|
+            {handle.error instanceof ToolCancelledError ? "cancelled" : "other"}
+            |{(handle.toolInput as { query?: string } | undefined)?.query ?? ""}
+          </div>
+        );
       }
       return (
         <div data-testid="lifecycle">
@@ -485,22 +534,29 @@ describe("react bridge runtime", () => {
 
     await bridge.sendToolCancelled({ reason: "user action" });
     await waitFor(() => {
-      expect(screen.getByTestId("lifecycle").textContent).toBe("pending|ap");
+      expect(screen.getByTestId("lifecycle").textContent).toBe(
+        "error|cancelled|ap"
+      );
     });
 
+    // Later notifications can belong to useCallTool/useViewTool executions.
+    // None may overwrite the cancelled rendering invocation.
     await bridge.sendToolInputPartial({ arguments: { query: "or" } });
-    await waitFor(() => {
-      expect(screen.getByTestId("lifecycle").textContent).toBe("pending|or");
-    });
-
     await bridge.sendToolInput({ arguments: { query: "orange" } });
     await bridge.sendToolResult({
       content: [{ type: "text", text: "ok" }],
       structuredContent: { query: "orange", items: ["o"] },
     });
+    await bridge.sendToolResult({
+      content: [{ type: "text", text: "late failure" }],
+      isError: true,
+    });
+    await bridge.sendToolCancelled({ reason: "second cancel" });
 
     await waitFor(() => {
-      expect(screen.getByTestId("lifecycle").textContent).toBe("ready|orange");
+      expect(screen.getByTestId("lifecycle").textContent).toBe(
+        "error|cancelled|ap"
+      );
     });
   });
 
@@ -1173,6 +1229,53 @@ describe("react bridge runtime", () => {
       expect(document.body.style.height).toBe("");
       expect(root!.style.height).toBe("");
     });
+  });
+
+  it("ThemeProvider keeps child state across display mode switches", async () => {
+    resetRuntime();
+    const { bridge, init } = await startHost();
+
+    let mounts = 0;
+    let setCount: ((value: SetStateAction<number>) => void) | undefined;
+
+    function Counter() {
+      const [count, set] = useState(() => {
+        mounts += 1;
+        return 0;
+      });
+      setCount = set;
+      return <div data-testid="count">{count}</div>;
+    }
+
+    function View() {
+      return (
+        <ThemeProvider>
+          <Counter />
+        </ThemeProvider>
+      );
+    }
+
+    act(() => {
+      bootstrapView({ default: View as ComponentType });
+    });
+    await init;
+
+    await waitFor(() => {
+      expect(screen.getByTestId("count").textContent).toBe("0");
+    });
+    act(() => {
+      setCount!(3);
+    });
+
+    for (const displayMode of ["fullscreen", "inline", "pip"] as const) {
+      await act(async () => {
+        await bridge.sendHostContextChange({ displayMode });
+      });
+      await waitFor(() => {
+        expect(screen.getByTestId("count").textContent).toBe("3");
+      });
+    }
+    expect(mounts).toBe(1);
   });
 
   it("ViewControls stays inline until Debug expands it, then restores the prior mode", async () => {

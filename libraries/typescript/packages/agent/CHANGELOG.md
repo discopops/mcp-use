@@ -1,5 +1,140 @@
 # @mcp-use/agent
 
+## 2.0.19
+
+### Patch Changes
+
+- 7d71ef7: The `RunOptions.messages` docs now state that only the native local agent supports it. The LangChain agent (`@mcp-use/agent/langchain`) ignores `messages`; pass prior messages through `externalHistory` instead.
+- Updated dependencies [7d71ef7]
+- Updated dependencies [7d71ef7]
+- Updated dependencies [7d71ef7]
+  - @mcp-use/client@2.3.4
+
+## 2.0.19-canary.3
+
+### Patch Changes
+
+- Updated dependencies [1a5dbe5]
+  - @mcp-use/client@2.3.4-canary.2
+
+## 2.0.19-canary.2
+
+### Patch Changes
+
+- aa20eef: The `RunOptions.messages` docs now state that only the native local agent supports it. The LangChain agent (`@mcp-use/agent/langchain`) ignores `messages`; pass prior messages through `externalHistory` instead.
+
+## 2.0.19-canary.1
+
+### Patch Changes
+
+- Updated dependencies [a294830]
+  - @mcp-use/client@2.3.4-canary.1
+
+## 2.0.19-canary.0
+
+### Patch Changes
+
+- Updated dependencies [a7f5b34]
+  - @mcp-use/client@2.3.4-canary.0
+
+## 2.0.18
+
+### Patch Changes
+
+- Updated dependencies [4866186]
+- Updated dependencies [4866186]
+- Updated dependencies [4866186]
+  - @mcp-use/client@2.3.3
+
+## 2.0.18-canary.1
+
+### Patch Changes
+
+- Updated dependencies [6e6f391]
+  - @mcp-use/client@2.3.3-canary.1
+
+## 2.0.18-canary.0
+
+### Patch Changes
+
+- Updated dependencies [b906d63]
+  - @mcp-use/client@2.3.3-canary.0
+
+## 2.0.17
+
+### Patch Changes
+
+- b1bda25: Fix `maxSteps` passed to `run`, `stream` or `streamEvents` not limiting model calls. The budget is baked into `modelCallLimitMiddleware` when the executor is built, so a per-call value never reached it: `run` and `stream` dropped it entirely, and `streamEvents` wrote it to the instance without rebuilding anything. It now goes through the run context, which the middleware reads first, and the constructor value stays the default for later calls.
+- b1bda25: Updated dependency `vitest` to `4.1.11`.
+- b1bda25: Mark the `auth_token` alias deprecated on both `MCPServerConfig` types. v2 renamed it to `authToken` and nothing has read the snake-case spelling since, so setting it produces no `Authorization` header. The field stays for now so existing TypeScript consumers keep compiling, and editors flag it at the call site instead. Removal waits for the next major.
+- Updated dependencies [b1bda25]
+  - @mcp-use/client@2.3.2
+
+## 2.0.17-canary.2
+
+### Patch Changes
+
+- e590397: Updated dependency `vitest` to `4.1.11`.
+
+## 2.0.17-canary.1
+
+### Patch Changes
+
+- e213f5a: Fix `maxSteps` passed to `run`, `stream` or `streamEvents` not limiting model calls. The budget is baked into `modelCallLimitMiddleware` when the executor is built, so a per-call value never reached it: `run` and `stream` dropped it entirely, and `streamEvents` wrote it to the instance without rebuilding anything. It now goes through the run context, which the middleware reads first, and the constructor value stays the default for later calls.
+- 76a7973: Mark the `auth_token` alias deprecated on both `MCPServerConfig` types. v2 renamed it to `authToken` and nothing has read the snake-case spelling since, so setting it produces no `Authorization` header. The field stays for now so existing TypeScript consumers keep compiling, and editors flag it at the call site instead. Removal waits for the next major.
+
+## 2.0.17-canary.0
+
+### Patch Changes
+
+- Updated dependencies [6f818f8]
+  - @mcp-use/client@2.3.2-canary.0
+
+## 2.0.16
+
+### Patch Changes
+
+- 485c79c: Fix OpenRouter BYOK requests to OpenAI models returning neither a model response nor an actionable provider error by routing those models through the Responses API.
+- Updated dependencies [485c79c]
+- Updated dependencies [485c79c]
+- Updated dependencies [485c79c]
+- Updated dependencies [485c79c]
+  - @mcp-use/client@2.3.1
+
+## 2.0.16-canary.4
+
+### Patch Changes
+
+- c1ad74e: Fix OpenRouter BYOK requests to OpenAI models returning neither a model response nor an actionable provider error by routing those models through the Responses API.
+
+## 2.0.16-canary.3
+
+### Patch Changes
+
+- Updated dependencies [4740f9b]
+  - @mcp-use/client@2.3.1-canary.3
+
+## 2.0.16-canary.2
+
+### Patch Changes
+
+- Updated dependencies [6e6de8b]
+  - @mcp-use/client@2.3.1-canary.2
+
+## 2.0.16-canary.1
+
+### Patch Changes
+
+- Updated dependencies [ce6b9e1]
+  - @mcp-use/client@2.3.1-canary.1
+
+## 2.0.16-canary.0
+
+### Patch Changes
+
+- Updated dependencies [322a6d3]
+  - @mcp-use/client@2.3.1-canary.0
+
 ## 2.0.15
 
 ### Patch Changes
